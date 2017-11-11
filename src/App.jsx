@@ -7,6 +7,8 @@ class App extends Component{
         super()
         this.addTask = this.addTask.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.remove = this.remove.bind(this)
+        
         this.state = {
             todos : [],
             value : ""
@@ -23,10 +25,21 @@ class App extends Component{
         })
     }
 
+    remove(i){
+        this.setState({
+            todos: [
+                ...this.state.todos.slice(0,i),
+            ...this.state.todos.slice(i+1)
+            ]
+        })
+
+
+    }
+
     render(){
         return (
             [<Add handleChange = {this.handleChange} addTask = {this.addTask}/>,
-            <Tasks arr = {this.state.todos}/>]
+            <Tasks arr = {this.state.todos} remove = {this.remove}/>]
         )
     }
 }

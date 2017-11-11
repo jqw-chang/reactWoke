@@ -84,6 +84,8 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
         super();
         this.addTask = this.addTask.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.remove = this.remove.bind(this);
+
         this.state = {
             todos: [],
             value: ""
@@ -100,8 +102,14 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
         });
     }
 
+    remove(i) {
+        this.setState({
+            todos: [...this.state.todos.slice(0, i), ...this.state.todos.slice(i + 1)]
+        });
+    }
+
     render() {
-        return [__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Add_jsx__["a" /* default */], { handleChange: this.handleChange, addTask: this.addTask }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Tasks_jsx__["a" /* default */], { arr: this.state.todos })];
+        return [__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Add_jsx__["a" /* default */], { handleChange: this.handleChange, addTask: this.addTask }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Tasks_jsx__["a" /* default */], { arr: this.state.todos, remove: this.remove })];
     }
 }
 
@@ -18275,7 +18283,13 @@ const Tasks = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createEleme
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'li',
             { key: i },
-            item
+            item,
+            ' ',
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'button',
+                { onClick: () => props.remove(i) },
+                'remove'
+            )
         );
     })
 );
